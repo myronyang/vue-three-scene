@@ -1,21 +1,35 @@
 # vue-threejs
 
-> A Vue.js project
+> three.js的Vue插件库
 
 ## Build Setup
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+```html
+<three-scene :option="sceneOption">
+  <three-camera :option="cameraOption" />
+  <three-controls />
+  <three-light :option="hemisphereLightOption" />
+  <three-light :option="directionalLightOption" />
+  <three-mtl-obj
+    :base-url="mtjObjOption.baseUrl"
+    :mtl-url="mtjObjOption.mtlUrl"
+    :obj-url="mtjObjOption.objUrl"
+    :position="mtjObjOption.position"
+    :scale="mtjObjOption.scale"
+    :rotate="mtjObjOption.rotate"
+  />
+</three-scene>
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+import VueThreeScene from 'vue-three-scene'
+
+Vue.use(VueThreeScene)
+
+### three-scene
+| 参数      | 说明          | 类型      | 可选值                           | 默认值  |
+|---------- |-------------- |---------- |--------------------------------  |-------- |
+| width | 视图宽度 | number | | 800 |
+| height | 按钮圆角 | number | | 500 |
+| backgroundColor | 背景颜色 | string | | |
+| option | 以上参数合集 | object | | |

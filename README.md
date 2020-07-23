@@ -1,8 +1,25 @@
 # vue-threejs
 
-> three.js的Vue插件库
+> threejs的Vue插件库
 
-## Build Setup
+> 组件化创建threejs场景
+
+> 双向绑定支持实时更新模型
+
+## 使用
+
+```js
+npm install vue-three-scene --save 
+
+yarn add vue-three-scene
+
+import VueThreeScene from 'vue-three-scene'
+
+Vue.use(VueThreeScene)
+```
+
+
+## 示例
 
 ```html
 <three-scene :option="sceneOption">
@@ -22,10 +39,7 @@
 ```
 
 
-import VueThreeScene from 'vue-three-scene'
-
-Vue.use(VueThreeScene)
-
+### 组件
 ### three-scene
 | 参数      | 说明          | 类型      | 可选值                           | 默认值  |
 |---------- |-------------- |---------- |--------------------------------  |-------- |

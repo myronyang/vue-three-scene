@@ -2,6 +2,8 @@
 import * as THREE from 'three'
 import { Common } from '@/assets/mixins/common'
 import { Group } from '@/assets/mixins/group'
+import Model from '@/controller/model'
+import { log } from 'three'
 
 const ADD_GROUP_NAMES = ['three-model', 'three-geometry', 'three-mtl-obj']
 
@@ -11,27 +13,26 @@ export default {
   data() {
     return {
       group: new THREE.Group(),
+      groups: [],
       childLength: null
     }
   },
 
   mounted() {
-    const childrens = this.$children.filter(child =>
+    this.childrens = this.$children.filter(child =>
       ADD_GROUP_NAMES.includes(child.$options.name)
     )
-    this.childLength = childrens.length
   },
 
   watch: {
-    'group.children'() {
-      const { group, childLength } = this
-      if (childLength === group.children.length) {
+    async 'group.children'() {
+      let { group, childrens } = this
+      if (childrens.length === group.children.length) {
         this.setGroup(group)
       }
     },
-
     $props: {
-      handler () {
+      handler() {
         this.setGroup(this.group)
       },
       deep: true

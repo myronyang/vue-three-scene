@@ -5,10 +5,6 @@ import OBJLoader from '@/assets/three/loaders/OBJLoader'
 import { Common } from '@/assets/mixins/common'
 import { Group } from '@/assets/mixins/group'
 
-const COMPONENT_NAME = {
-  GROUP: 'three-model-group'
-}
-
 export default {
   name: 'three-mtl-obj',
   mixins: [Common, Group],
@@ -17,18 +13,6 @@ export default {
     mtlUrl: String,
     objUrl: String
   },
-
-  computed: {
-    parentGroup() {
-      let parent = this.$parent
-      const has = parent && parent.$options.name === COMPONENT_NAME.GROUP
-      return {
-        has,
-        group: parent.group
-      }
-    }
-  },
-
   created() {
     this.loadModel()
   },
@@ -58,12 +42,9 @@ export default {
         objLoader.load(
           objUrl,
           group => {
-            const hasParentGroup = this.parentGroup.has
-
-            if (hasParentGroup) {
-              this.hasParentGroup.group.add(group)
-            }
-            this.setGroup(group, hasParentGroup)
+            const _has = this.parentGroup.has
+            if (_has) this.parentGroup.group.add(group)
+            this.setGroup(group, _has)
           },
           this.onProgress,
           this.onError

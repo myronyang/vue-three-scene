@@ -18,6 +18,11 @@ export default new Router({
       path: '/geometry',
       name: 'geometry',
       component: r => require.ensure([], () => r(require('../views/geometry')), 'geometry')
+    },
+    {
+      path: '/shirt',
+      name: 'shirt',
+      component: r => require.ensure([], () => r(require('../views/shirt')), 'shirt')
     }
   ]
 })

@@ -1,6 +1,7 @@
 <script>
 import { generateUUID } from '@/assets/script/utils'
 import { Common } from '@/assets/mixins/common'
+import { log } from 'three'
 export default {
   name: 'three-texture',
   mixins: [Common],
@@ -73,10 +74,13 @@ export default {
     $props: {
       handler() {
         for (const key in this.texture) {
-          if (this.$props[key]) {
+          if (this.$props.imageUrl) {
+            this.texture.image.url = this.$props.imageUrl
+          } else {
             this.texture[key] = this.$props[key]
           }
         }
+        
         this.$parent.reRender('texture')
       },
       deep: true

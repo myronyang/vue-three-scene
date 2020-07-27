@@ -1,3 +1,8 @@
+const COMPONENT_NAME = {
+  GROUP: 'three-model-group',
+  MATERIAL: 'three-material'
+}
+
 export const Group = {
   props: {
     position: Array,
@@ -5,6 +10,29 @@ export const Group = {
     scale: Array,
     rotate: Object,
     option: Object
+  },
+
+  computed: {
+    parentGroup() {
+      let parent = this.$parent
+      const has = parent && parent.$options.name === COMPONENT_NAME.GROUP
+      return {
+        has,
+        group: parent.group
+      }
+    },
+    
+    material() {
+      const parent = this.$parent
+      const children = this.$children
+      if (parent.$options.name === COMPONENT_NAME.GROUP && parent.material[0]) {
+        return parent.material
+      }
+      const materials = children.filter(
+        child => child.$options.name === COMPONENT_NAME.MATERIAL
+      )
+      return materials.map(item => item.material)
+    }
   },
 
   methods: {

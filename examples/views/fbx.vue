@@ -28,7 +28,7 @@
             <three-texture
               type="map"
               :repeat="repeat"
-              image-url="http://djitemhd.oss-cn-shanghai.aliyuncs.com/3520d1fd-8206-44ab-84b8-ccab7970149a.jpeg"
+              :image-url="imageUrl"
             />
             <three-texture
               type="normalMap"
@@ -57,6 +57,7 @@ export default {
       },
       metalness: 0.5,
       repeat: [10, 10],
+      imageUrl: 'http://djitemhd.oss-cn-shanghai.aliyuncs.com/3520d1fd-8206-44ab-84b8-ccab7970149a.jpeg',
       modelGroupOption: {
         scale: [0.0028, 0.0028, 0.0028]
       },
@@ -140,7 +141,8 @@ export default {
       this.modelGroupOption.scale = [0.003, 0.003, 0.003]
       this.metalness = 7
       this.repeat = [20, 20]
-    }, 4000);
+      this.imageUrl = 'https://gxzn-free.oss-cn-zhangjiakou.aliyuncs.com/clothingWeb/2020/7/17/clothingWeb-20200717-151619-025-6154bb44d2114b4683d49abe76f70d2b.jpg'
+    }, 2000);
 
   },
 

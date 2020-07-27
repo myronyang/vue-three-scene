@@ -4,6 +4,9 @@ import { generateUUID } from '../assets/script/utils'
 import { Common } from '@/assets/mixins/common'
 import MTLLoader from '@/assets/three/loaders/MTLLoader'
 import OBJLoader from '@/assets/three/loaders/OBJLoader'
+import { log } from 'three'
+
+const ADD_GROUP_NAMES = ['three-model', 'three-geometry', 'three-mtl-obj']
 
 export default {
   name: 'three-material',
@@ -95,14 +98,25 @@ export default {
     },
 
     reRender(type) {
+      this.init()
+
       for (const key in this.material) {
         if (this.$props[key]) {
           this.material[key] = this.$props[key]
         }
       }
-      if (type !== 'texture') {
+
+      if (this.$parent.$options.name === 'three-model-group') {
+        const childrens = this.$parent.$children.filter(child =>
+          ADD_GROUP_NAMES.includes(child.$options.name)
+        )
+        childrens.forEach(children => {
+          children.reRender('material')
+        })
+      } else {
         this.$parent.reRender()
       }
+   
     }
   },
 
